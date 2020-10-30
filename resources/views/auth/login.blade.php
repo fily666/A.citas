@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-
-    <title>Iniciar Sesión</title>
-
-    <link href="https://dubrands.linktic.com/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://dubrands.linktic.com/assets/css/login.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <div id="app">
-        
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -36,9 +18,9 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -50,14 +32,22 @@
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
 
-
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -65,19 +55,15 @@
                                     Login
                                 </button>
 
-
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
-
-</html>
+</div>
+@endsection
